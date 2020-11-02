@@ -1,0 +1,78 @@
+<html>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<head>
+    <style>
+        .label {
+            float: left;
+            width: 120px;
+        }
+
+        .error {
+            color: red;
+            padding-left: 10px;
+        }
+
+        .submit {
+            margin-left: 125px;
+            margin-top: 10px;
+        }
+
+        div {
+            padding: 5px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $('.error').hide();                                                 //Menyembunyikan Pesan Error
+            $('.userid').blur(function () {                                    //digunakan untuk membuat efek blur jika pengguna setelah mengetik sesuatu di box lalu mengklik diluar box
+                data = $('.userid').val();  
+                var len = data.length;                                          // menset nilai variabel len menjadi suatu nilaiyang sesuai dengan panjang data 
+                if (len < 1) {                                                  //jika panjang data kurang dari 1 maka 
+                    $('.userid').next().show();                                 // maka kelas userid ditampilkan
+                    $('.password').attr('disabled', true);                    //digunakan untuk menonaktifkan box password jika pengguna belum emngisi box sebelumnya
+                    $('.confpass').attr('disabled', true);                    // digunakan untuk menonaktifkan box confirm password jika pengguna belum mengisi box sebelumnya
+                }
+                else {
+                    $('.userid').next().hide();
+                    $('.password').removeAttr('disabled');                   //digunakan untuk mengaktifkan box password
+                    $('.confpass').removeAttr('disabled');                    //digunakan untuk mengaktifkan box konfirmasi password
+                }
+            });
+            $('.password').blur(function () {                                  //digunakan untuk membuat efek blur jika pengguna setelah mengetik sesuatu di box lalu mengklik diluar box
+                data = $('.password').val();
+                var len = data.length;                                          // menset nilai variabel len menjadi suatu nilaiyang sesuai dengan panjang data 
+                if (len < 1) {                                                  //jika panjang data kurang dari 1 maka 
+                    $('.password').next().show();                               //maka kelas password ditampiljan
+                    $('.confpass').attr('disabled', true);                      // digunakan untuk menonaktifkan box confirm password jika pengguna belum mengisi box sebelumnya
+                }
+                else {
+                    $('.password').next().hide();
+                    $('.confpass').removeAttr('disabled');                      //digunakan untuk mengaktifkan box konfirmasi password
+                }
+            });
+            $('.confpass').blur(function () {                                    //digunakan untuk membuat efek blur jika pengguna setelah mengetik sesuatu di box lalu mengklik diluar box
+                if ($('.password').val() != $('.confpass').val()) {
+                    $('.confpass').next().show();
+                }
+                else {
+                    $('.confpass').next().hide(); 
+                }
+            });
+        }); 
+    </script>
+  
+</head>
+
+<body>
+    <form>
+        <div><span class="label"> Nama </span><input type="text" class="userid" name="userid" /><span class="error">
+                nama tidak boleh kosong</span></div>
+        <div><span class="label"> Nrp </span><input type="password" class="password" name="password" /><span
+                class="error"> nrp tidak boleh kosong </span></div>
+        <div><span class="label">konfirmasi  NRP </span><input type="password" class="confpass" name="confpass" /><span
+                class="error"> nrp dan konfirmasi nrp tidak
+                sama</span></div>
+    </form>
+</body>
+
+</html>
